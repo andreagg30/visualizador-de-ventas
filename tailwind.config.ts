@@ -25,9 +25,11 @@ export default {
       colors: {
         primary: '#E2211C',
         secondary: '#0E1A77',
+        background: '#fcfcfc',
         'pastel-yellow': '#FFE6B3',
         'disabled-50': '#F2F2F2',
         'disabled-font': '#727074',
+        'disabled-icon': '#cccccc',
         'white-10': 'rgba(255, 255, 255, 0.10)',
         'white-30': 'rgba(255, 255, 255, 0.30)',
         'white-80': 'rgba(255, 255, 255, 0.80)',

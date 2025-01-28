@@ -11,9 +11,8 @@ export default function Layout() {
       <AppBar />
       <SideBar />
       <main className={cn("relative min-h-screen py-16", {'pl-56': open})}>
-        <div className="max-780:px-3 relative z-10 flex flex-col px-[10%] bg-gray-800 text-white">
+        
           <Outlet />
-        </div>
       </main>
     </div>
   );

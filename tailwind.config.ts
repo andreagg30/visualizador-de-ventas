@@ -32,7 +32,7 @@ export default {
         'disabled-icon': '#cccccc',
         'white-10': 'rgba(255, 255, 255, 0.10)',
         'white-30': 'rgba(255, 255, 255, 0.30)',
-        'white-80': 'rgba(255, 255, 255, 0.80)',
+        'white-80': 'rgba(255, 255, 255, 0.80)'
       },
       fontFamily: {
         onest: ['"Onest"', 'sans-serif'],

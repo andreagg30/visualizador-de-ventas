@@ -4,16 +4,30 @@ import {
   ComposedChart,
   LabelList,
   Legend,
+  Line,
   Rectangle,
   ResponsiveContainer,
-  Scatter,
   Tooltip,
   YAxis,
 } from 'recharts';
 interface Props {
-  data?: unknown[];
+  data?: unknown[]
 }
 const dataDef = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+    ja: 1000,
+  },
+  {
+    name: 'Page A',
+    uv: 70,
+    pv: 50,
+    amt: 2400,
+    ja: 60,
+  },
   {
     name: 'Page A',
     uv: 4000,
@@ -24,7 +38,7 @@ const dataDef = [
 ];
 // https://recharts.org/en-US/api/LabelList
 
-export default function BarChartTwin({ data= dataDef}: Props) {
+export default function BarChartLine({ data= dataDef }: Props) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart
@@ -42,15 +56,15 @@ export default function BarChartTwin({ data= dataDef}: Props) {
         <YAxis orientation="right" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle />}>
-          <LabelList position="top" fill="#000000" dataKey="name" />
-        </Bar>
-        <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle />}>
-          <LabelList position="top" fill="#000000" dataKey="name" />
-        </Bar>
-        <Scatter dataKey="ja" fill="#000000" shape="circle">
-          <LabelList position="top" fill="white" dataKey="name" />
-        </Scatter>
+        <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle />} ><LabelList position="top" fill="#000000" dataKey="name" /></Bar>
+        <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle />} >
+        <LabelList position="top" fill="#000000" dataKey="name" /></Bar>
+        
+        <Line type="linear" dot={false} dataKey="ja" stroke="#e86f37">
+        <LabelList position="top" fill="white" dataKey="name" />
+
+        </Line>
+
       </ComposedChart>
     </ResponsiveContainer>
   );

@@ -1,5 +1,4 @@
 import { cn } from '@/utils/helpers';
-import { MenuSelect } from '.';
 import IconButton from './IconButton';
 import { CloseIcon, MenuIcon } from '@/icons';
 import { useGlobalContext } from '@/context/GlobalContext';
@@ -26,7 +25,6 @@ export default function AppBar() {
       <div
         className={cn(RESPONSIVE_SHOW_CLASSES, 'flex flex-1 justify-end pr-4')}
       >
-        <MenuSelect items={[]} />
       </div>
 
      

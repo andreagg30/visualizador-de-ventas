@@ -10,9 +10,9 @@ export default function Layout() {
     <div className="font-onest bg-background">
       <AppBar />
       <SideBar />
-      <main className={cn("relative min-h-screen py-16", {'pl-56': open})}>
+      <main className={cn("relative min-h-screen py-16", {'pl-60': open})}>
         
-          <Outlet />
+         <div className='flex flex-col p-3'> <Outlet /></div>
       </main>
     </div>
   );

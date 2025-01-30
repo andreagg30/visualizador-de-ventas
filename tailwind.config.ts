@@ -28,6 +28,7 @@ export default {
         background: '#fcfcfc',
         'pastel-yellow': '#FFE6B3',
         'disabled-50': '#F2F2F2',
+        'disabled-font-50': '#e0e0e0',
         'disabled-font': '#727074',
         'disabled-icon': '#cccccc',
         'white-10': 'rgba(255, 255, 255, 0.10)',

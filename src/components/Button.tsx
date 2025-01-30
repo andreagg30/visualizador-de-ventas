@@ -1,17 +1,17 @@
-import { cn } from '@/utils/helpers';
+import { cn } from "@/utils/helpers";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
-export default function Button({ children, className }: ButtonProps) {
+export default function Button({ children, className, ...props }: ButtonProps) {
   return (
     <button
       className={cn(
-        'hover:bg-pastel-pink rounded-lg bg-orange px-6 py-2 text-lg text-white transition-all duration-500 hover:scale-105',
+        "hover:bg-pastel-pink rounded-3xl bg-primary px-6 py-2 text-lg text-white transition-all duration-500 hover:scale-105",
         className
       )}
+      {...props} 
     >
       {children}
     </button>

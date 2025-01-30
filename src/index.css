@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* Hides the calendar picker indicator in date input fields */
+    input[type='date']::-webkit-calendar-picker-indicator {
+      display: none;
+    }
+    * {
+        font-family: "Poppins", sans-serif;
+    }
+}

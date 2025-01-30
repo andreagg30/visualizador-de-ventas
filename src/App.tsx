@@ -11,6 +11,7 @@ import DetalleSucursal from './pages/DetalleSucursal';
 import DetalleVendedor from './pages/DetalleVendedor';
 import RankingVendedor from './pages/RankingVendedor';
 import DetalleUnidadNegocio from './pages/DetalleUnidadNegocio';
+import './locale/es-mx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

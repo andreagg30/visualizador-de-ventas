@@ -7,13 +7,15 @@ import { cn } from '@/utils/helpers';
 import Popover from './Popover';
 import useDatePickerSelect from '@/hooks/useDatePickerSelect';
 import DatePicker from './DatePicker';
+import LabelInput from './LabelInput';
 
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   selectedDate?: string | undefined | null;
   inputId?: string;
   disabled?: boolean;
   className?: string;
   handleSelectedDate: (value: string | undefined) => void;
+  label?: string;
 }
 
 export default function DatePickerSelect({
@@ -21,8 +23,10 @@ export default function DatePickerSelect({
   disabled,
   inputId,
   handleSelectedDate,
+  label,
+  className,
   ...buttonProps
-}: DivProps) {
+}: Props) {
   const currentDate = selectedDate
     ? moment(selectedDate).format('YYYY-MM-DD')
     : '';
@@ -37,14 +41,13 @@ export default function DatePickerSelect({
   } = useDatePickerSelect(handleSelectedDate);
 
   return (
-    <>
+    <div className={cn('flex flex-col gap-1', className)}>
+      {label && <LabelInput>{label}</LabelInput>}
+
       <div
         ref={referenceElement}
         className={cn(
-          'group relative w-full items-center rounded-sm pr-3 text-[1rem] font-normal leading-[1.5rem] outline outline-1 transition-all disabled:border-none',
-          {
-            'outline-2': isPopperOpen,
-          },
+          'group relative w-full items-center rounded-sm pr-3 outline outline-1 transition-all disabled:border-none',
           'h-12 text-base'
         )}
         {...buttonProps}
@@ -68,7 +71,7 @@ export default function DatePickerSelect({
             ></input>
           </div>
 
-          <div >
+          <div>
             <IconButton onClick={!disabled ? handleButtonClick : undefined}>
               <CalendarIcon
                 className={cn(
@@ -91,6 +94,6 @@ export default function DatePickerSelect({
           handleToday={handleToday}
         />
       </Popover>
-    </>
+    </div>
   );
 }

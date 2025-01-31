@@ -4,6 +4,7 @@ import React from 'react';
 import { useDropdown } from '@/hooks';
 import Popover from './Popover';
 import { cn } from '@/utils/helpers';
+import LabelInput from './LabelInput';
 
 export type DropdownValueType = number | string | boolean;
 export interface DropdownOption {
@@ -27,7 +28,7 @@ export interface DropdownProps
   onPopperOpenChange?: (isOpen: boolean) => void;
   helperText?: string;
   warning?: boolean;
-  icon?: React.ReactElement;
+  label?: string;
 }
 
 export default function Dropdown({
@@ -39,7 +40,7 @@ export default function Dropdown({
   keyName,
   className,
   onPopperOpenChange,
-  icon,
+  label,
   ...props
 }: DropdownProps) {
   const {
@@ -54,23 +55,13 @@ export default function Dropdown({
 
   const offsetWidth = referenceElement?.current?.offsetWidth;
   return (
-    <div
-      className={cn(
-        'group flex flex-col text-[1rem] font-normal leading-[1.5rem]',
-        className,
-      )}
-    >
+    <div className={cn('group flex flex-col gap-1', className)}>
+      {label && <LabelInput>{label}</LabelInput>}
       <button
         disabled={disabled}
         className={cn(
-          `flex outline outline-1 transition-all focus:outline-2 disabled:border-none disabled:outline-1`,
-          'h-12',
-          'relative items-center rounded-sm border-none pr-1 outline-offset-0',
-          {
-            'outline-2': isPopperOpen,
-          },
-          'bg-brand-50 text-brand-950 outline-brand-950',
-          className,
+          'outline-border-input relative flex h-12 items-center rounded-sm border-none pr-1 text-base font-normal outline outline-1 outline-offset-0 transition-all',
+          className
         )}
         onClick={handleButtonClick}
         ref={referenceElement}
@@ -81,30 +72,23 @@ export default function Dropdown({
         <div
           className={cn(
             'flex-auto overflow-hidden pl-3 text-start',
-            selectedValue && 'pr-3',
+            selectedValue && 'pr-3'
           )}
         >
-          {
-            ((selectedValue as DropdownOption)?.[keyName || 'label'] ??
-            defaultText)
-          }
+          {(selectedValue as DropdownOption)?.[keyName || 'label'] ??
+            defaultText}
         </div>
 
         <div
           className={cn('w-6 transition-all', {
-            'rotate-180': !icon && isPopperOpen,
+            'rotate-180': isPopperOpen,
           })}
         >
           <div className="flex w-6 overflow-hidden">
-            {icon ? (
-              React.cloneElement(icon, { className: 'group transition-all' })
-            ) : (
-              <ExpandMoreIcon className={cn('fill-black', )} />
-            )}
+            <ExpandMoreIcon className={cn('fill-black')} />
           </div>
         </div>
       </button>
-
 
       <Popover
         isPopperOpen={isPopperOpen}
@@ -119,14 +103,10 @@ export default function Dropdown({
           {options.map((item, i) => (
             <li
               key={i}
-              className="cursor-pointer border-b p-0 text-black typography-body-md hover:bg-brand-50"
+              className="typography-body-md hover:bg-brand-50 cursor-pointer border-b p-0 text-black"
             >
               <button
-                onClick={() =>
-                  handleSelectedValue(
-                    (item as DropdownOption),
-                  )
-                }
+                onClick={() => handleSelectedValue(item as DropdownOption)}
                 className="h-full w-full px-6 py-2 text-left"
               >
                 {item[keyName || 'label']}

@@ -36,7 +36,7 @@ export default function DatePicker({
     return moment(mes).format('MMMM');
   };
   return (
-    <div className="min-h-[302px] min-w-60 rounded-lg border bg-white p-2.5 shadow-[0px_2px_5px_-1px_rgba(50,50,93,0.25),0px_1px_3px_-1px_rgba(0,0,0,0.3)]">
+    <div className="min-h-[302px] min-w-60 rounded-lg my-2 border bg-white p-2.5 shadow-[0px_2px_5px_-1px_rgba(50,50,93,0.25),0px_1px_3px_-1px_rgba(0,0,0,0.3)]">
       <div className="flex items-center justify-between">
         <IconButton onClick={handleBack}>
           <ChevronLeft className="h-[18px] w-[18px]" />

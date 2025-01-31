@@ -33,7 +33,11 @@ export default {
         'disabled-icon': '#cccccc',
         'white-10': 'rgba(255, 255, 255, 0.10)',
         'white-30': 'rgba(255, 255, 255, 0.30)',
-        'white-80': 'rgba(255, 255, 255, 0.80)'
+        'white-80': 'rgba(255, 255, 255, 0.80)',
+        error: '#DA291C',
+        success: '#7AC97C',
+        'border-input': '#8D8D8D',
+        'helper-text': '#BABABA'
       },
       fontFamily: {
         onest: ['"Onest"', 'sans-serif'],

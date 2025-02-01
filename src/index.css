@@ -10,4 +10,7 @@
     * {
         font-family: "Poppins", sans-serif;
     }
+    g {
+        outline: none !important;
+      }
 }

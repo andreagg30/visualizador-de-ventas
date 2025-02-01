@@ -37,6 +37,7 @@ export default {
         error: '#DA291C',
         success: '#7AC97C',
         'border-input': '#8D8D8D',
+        'chart-gray': '#605E5C',
         'helper-text': '#BABABA'
       },
       fontFamily: {

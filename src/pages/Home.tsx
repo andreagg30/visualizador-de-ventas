@@ -1,7 +1,7 @@
 import {
   BarChartLine,
   BarChartTwin,
-  PieChartContainer,
+  PieChart,
   StackedVerticalBarChart,
   TreeChart,
 } from '@/components';
@@ -17,7 +17,7 @@ export default function Home() {
         <StackedVerticalBarChart />
       </div>
       <div className="h-96 w-96">
-        <PieChartContainer
+        <PieChart
           data={[
             { name: 'hola', value: 20 },
             { name: 'hola', value: 70 },

@@ -6,8 +6,9 @@ import DatePicker from './DatePicker';
 import DatePickerSelect from './DatePickerSelect';
 import Dropdown from './Dropdown';
 import LabelInput from './LabelInput';
+import LegendItem from './LegendItem';
 import PaswordTextField from './PaswordTextField';
-import PieChartContainer from './PieChart';
+import PieChart from './PieChart';
 import SideBar from './SideBar';
 import StackedVerticalBarChart from './StackedVerticalBarChart';
 import TextField from './TextField';
@@ -19,7 +20,7 @@ export {
   DatePicker,
   StackedVerticalBarChart,
   SideBar,
-  PieChartContainer,
+  PieChart,
   BarChartTwin,
   BarChartLine,
   DatePickerSelect,
@@ -27,5 +28,6 @@ export {
   Dropdown,
   TextField,
   LabelInput,
-  PaswordTextField
+  PaswordTextField,
+  LegendItem
 };

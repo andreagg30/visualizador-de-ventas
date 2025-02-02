@@ -2,8 +2,10 @@ import { cn, getColors } from '@/utils/helpers';
 import React from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import LegendItem from './LegendItem';
+import CustomTooltip, { TooltipItem } from './CustomTooltip';
+import CustomLegend from './CustomLegend';
 // https://recharts.org/en-US/examples/TwoSimplePieChart
-interface ChartData {
+export interface ChartData {
   name: string;
   value: number;
 }
@@ -14,6 +16,7 @@ interface Props {
   activeChart?: number | null;
   className?: string;
   title?: string;
+  tooltipItems?: TooltipItem[];
 }
 
 interface RenderCustomizedLabel {
@@ -64,6 +67,7 @@ export default function PieChartContainer({
   activeChart,
   className,
   title,
+  tooltipItems,
 }: Props) {
   const colors = getColors(data.length);
   return (
@@ -74,7 +78,7 @@ export default function PieChartContainer({
       )}
     >
       <div className="text-center">
-        <span className="font-bold text-xl text-primary">{title}</span>
+        <span className="text-xl font-bold text-primary">{title}</span>
       </div>
       <div className="flex">
         <div className="flex h-[150px] w-[150px] flex-1 items-center">
@@ -92,7 +96,7 @@ export default function PieChartContainer({
                 dataKey="value"
                 style={{ outline: 'none' }}
               >
-                {data.map((entry, index) => (
+                {data.map((_entry, index) => (
                   <Cell
                     onClick={
                       handleActiveChart
@@ -113,27 +117,16 @@ export default function PieChartContainer({
                   />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip content={<CustomTooltip items={tooltipItems || []} />} />
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex h-full w-40 flex-col justify-center">
-          {data.map((item, i) => (
-            <LegendItem
-              key={i}
-              active={ activeChart !== null &&
-                activeChart !== undefined &&
-                activeChart === i}
-              onClick={
-                handleActiveChart ? () => handleActiveChart(i) : undefined
-              }
-              
-              color={colors[i]}
-            >
-              {item.name}
-            </LegendItem>
-          ))}
-        </div>
+        <CustomLegend
+          data={data}
+          handleActiveChart={handleActiveChart}
+          activeChart={activeChart}
+          colors={colors}
+        />
       </div>
     </div>
   );

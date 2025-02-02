@@ -22,7 +22,7 @@ export function topFunction() {
 
 export function getColors(count: number, customColors: string[] = []): string[] {
   const predefinedColors: string[] = [
-    "#653819", "#E66C37", "#12239E", "#6B007B", "#FFFFFF",
+    "#653819", "#E66C37", "#12239E", "#6B007B", "#ff6fa9",
     "#E044A7", "#E7E0DB", "#D9B300", "#744EC2", "#643617",
     "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#A133FF",
     "#33FFF5", "#FFD700", "#FF4500", "#2E8B57", "#8B0000",

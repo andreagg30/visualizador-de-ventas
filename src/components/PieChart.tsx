@@ -1,7 +1,5 @@
 import { cn, getColors } from '@/utils/helpers';
-import React from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import LegendItem from './LegendItem';
 import CustomTooltip, { TooltipItem } from './CustomTooltip';
 import CustomLegend from './CustomLegend';
 // https://recharts.org/en-US/examples/TwoSimplePieChart

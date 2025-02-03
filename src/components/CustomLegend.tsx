@@ -3,7 +3,7 @@ import LegendItem from './LegendItem';
 import { ChartData } from './PieChart';
 import { usePaginator } from '@/hooks';
 import IconButton from './IconButton';
-import { ChevronLeft, ExpandMoreIcon } from '@/icons';
+import { ExpandMoreIcon } from '@/icons';
 interface Props {
   data: ChartData[];
   handleActiveChart?: (index: number) => void;

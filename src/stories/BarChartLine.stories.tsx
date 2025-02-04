@@ -6,7 +6,7 @@ const meta = {
   component: BarChartLine,
   tags: ['autodocs'],
   decorators: (Story) => (
-    <div className="flex h-[300px] w-[500px] flex-col items-center">
+    <div className="flex w-[750px] h-[300px] flex-col items-center">
       <Story />
     </div>
   ),
@@ -17,7 +17,7 @@ const meta = {
     data: [
       {
         name: 'Page A',
-        uv: 4000,
+        uv: 500,
         pv: 2400,
         amt: 2400,
         ja: 1000,
@@ -30,8 +30,8 @@ const meta = {
         ja: 60,
       },
       {
-        name: 'Page A',
-        uv: 4000,
+        name: 'Page B',
+        uv: 300,
         pv: 2400,
         amt: 2400,
         ja: 1000,
@@ -60,10 +60,10 @@ const meta = {
     xAxisKey: 'name',
     title: 'Ventas por unidad de negocio',
     className: 'w-[600px]',
-    legendKey: 'label'
-    /*  activeChart: 1,
+    legendKey: 'label',
     tooltipItems: [{label: 'cTipoSucursal', key: 'name'}, {label: 'value', key: (item) => `$${item?.value}.00`}],
-    title: 'Ventas por unidad de negocio' */
+    activeChart: 1,
+    activeChartGroup: null,
   },
 } satisfies Meta<typeof BarChartLine>;
 

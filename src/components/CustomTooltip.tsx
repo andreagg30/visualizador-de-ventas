@@ -15,20 +15,12 @@ export default function CustomTooltip({
   active,
   payload,
   items,
-  ...props
 }: CustomTooltipProps) {
-  console.log(props, 'props');
   if (active && payload && payload.length) {
     return (
-      <div className="flex p-1 flex-col rounded-sm border bg-white shadow-sm">
+      <>
+      <div className="flex z-[999] p-1 flex-col rounded-sm border bg-white shadow-sm" >
         <table className="w-full">
-          {/* <thead>
-    <tr className="bg-gray-100">
-      <th className="p-2 text-left">Columna 1</th>
-      <th className="p-2 text-left">Columna 2</th>
-      <th className="p-2 text-left">Columna 3</th>
-    </tr>
-  </thead> */}
           <tbody>
             {items.map((item, i) => (
               <tr key={i} className="text-xs">
@@ -47,6 +39,7 @@ export default function CustomTooltip({
           </tbody>
         </table>
       </div>
+      </>
     );
   }
 

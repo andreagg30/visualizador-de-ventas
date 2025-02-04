@@ -21,13 +21,13 @@ export default function VerticalCustomLegend({
 }: Props) {
     usePaginator(data);
   return (
-    <div className={cn('flex h-full gap-1 justify-center', className)}>
+    <div className={cn('flex gap-1 justify-center', className)}>
       {data.map((item, i) => (
         <LegendItem
           key={i}
           active={
-            activeChart !== null &&
-            activeChart !== undefined &&
+            activeChart !== null ||
+            activeChart !== undefined ||
             activeChart === i
           }
           onClick={handleActiveChart ? () => handleActiveChart(i) : undefined}

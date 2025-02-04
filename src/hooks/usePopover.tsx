@@ -31,7 +31,7 @@ export default function usePopover<T extends HTMLElement>({
 }: PopoverProps = {}) {
   const [isPopperOpen, setIsPopperOpen] = useState(false);
   const [popperPlacement, setPopperPlacement] = useState<Placement | null>(
-    null,
+    null
   );
 
   const referenceElement = useRef<T>(null);
@@ -40,8 +40,6 @@ export default function usePopover<T extends HTMLElement>({
   const handlePopperElement = (e: HTMLDivElement | null) => {
     setPopperElement(e);
   };
-
-  const [marginTop, setMarginTop] = useState<number | undefined>(); // To give the appropriate margin-top to the popper arrow when the popper is placed on the left or right
 
   useEffect(() => {
     if (referenceElement.current && popperElement) {
@@ -78,30 +76,58 @@ export default function usePopover<T extends HTMLElement>({
           }).then(({ x, y, placement }) => {
             const newPlacement = placement || 'bottom';
 
-            if (
-              ['left', 'right'].some((position) =>
-                newPlacement?.includes(position),
-              )
-            ) {
-              const rect = referenceElement?.current?.getBoundingClientRect();
+            /* // Obtiene todos los elementos con la misma clase
+            const allDivs = document.querySelectorAll('.dialog-sheet'); // Ajusta la clase correcta
 
-              if (rect?.top) {
-                // Calculating the margin-top for the arrow
-                const marginTop = (rect?.top || 0) - y + 4; // 4 to give extra margin between the arrow and the reference element
-                setMarginTop(marginTop);
+            let isColliding = false;
+
+            allDivs.forEach((div) => {
+              const divRect = div.getBoundingClientRect();
+
+              // Validar si x, y chocan con otro div
+              if (
+                x < divRect.right && // x está dentro del rango horizontal del div
+                x + popperElement.offsetWidth > divRect.left &&
+                y < divRect.bottom && // y está dentro del rango vertical del div
+                y + popperElement.offsetHeight > divRect.top
+              ) {
+                isColliding = true;
               }
+            });
+
+            if (isColliding && newPlacement === 'bottom') {
+              Object.assign(popperElement.style, {
+                position: 'fixed',
+                left: `${x}px`,
+                top: `${y - 16}px`,
+              });
+              setPopperPlacement('top');
+            } else if (isColliding && newPlacement === 'top') {
+              Object.assign(popperElement.style, {
+                position: 'fixed',
+                left: `${x}px`,
+                top: `${y + 16}px`,
+              });
+              setPopperPlacement('bottom');
             } else {
-              setMarginTop(undefined);
-            }
+              Object.assign(popperElement.style, {
+                position: 'fixed',
+                left: `${x}px`,
+                top: `${y}px`,
+              });
+
+              setPopperPlacement(newPlacement);
+            } */
 
             Object.assign(popperElement.style, {
               position: 'fixed',
               left: `${x}px`,
               top: `${y}px`,
             });
+
             setPopperPlacement(newPlacement);
           });
-        },
+        }
       );
 
       // Cleanup on unmount or when dependencies change
@@ -129,7 +155,6 @@ export default function usePopover<T extends HTMLElement>({
     handlePopperElement,
     isPopperOpen,
     referenceElement,
-    marginTop,
     popperPlacement,
   };
 }

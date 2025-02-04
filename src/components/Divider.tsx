@@ -6,6 +6,6 @@ interface Props {
 
 export default function Divider({ className }: Props) {
   return (
-    <div className={cn('bg-white-10 h-px w-full rounded-lg', className)} />
+    <div className={cn('bg-disabled-icon h-px w-full rounded-lg', className)} />
   );
 }

@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
+import Popover from './Popover';
+import usePopover from '@/hooks/usePopover';
+import { cn } from '@/utils/helpers';
+import { Placement } from '@floating-ui/dom';
 
 interface CustomBarLabelProps {
   x?: any;
@@ -8,47 +12,52 @@ interface CustomBarLabelProps {
   bgColor?: string;
   top?: boolean;
   color?: string;
+  width?: any;
+  placement?: Placement;
+  variant?: 'primary' | 'secondary';
 }
 
 const CustomBarLabel: React.FC<CustomBarLabelProps> = ({
   x = 0,
   y = 0,
   value,
-  bgColor = 'rgba(18, 35, 158, 0.5)',
-  color = '#FFFFFF',
+  variant = 'primary',
+  placement = 'top',
+  width,
 }) => {
+  const { popperPlacement, handlePopperElement, referenceElement } =
+    usePopover<any>({ placement: placement });
+
   if (!value) return null; // Evita etiquetas vacías
 
-  const textWidth = value.toString().length * 8; // Ancho estimado del texto
-  const padding = 8; // Espaciado interno
-  const rectWidth = textWidth + padding * 2; // Ancho del rectángulo
-  const rectHeight = 20; // Alto del rectángulo
-
   return (
-    <g
-      transform={
-        top
-          ? `translate(${x- 8},${y - 20})`
-          : `translate(${x - rectWidth / 2},${y - 25})`
-      }
-    >
-      <rect
-        width={rectWidth}
-        height={rectHeight}
-        fill={bgColor}
-        rx={4} // Bordes redondeados
-      />
-      <text
-        x={rectWidth / 2} // Centra el texto dentro del rectángulo
-        y={rectHeight / 2}
-        dy=".35em"
-        textAnchor="middle"
-        fill={color}
-        fontSize={12}
+    <>
+      <g ref={referenceElement} transform={`translate(${x},${y})`}>
+        <rect width={width} height={3} fill={'transparent'} />
+      </g>
+      <Popover
+        isPopperOpen={true}
+        handlePopperElement={handlePopperElement}
+        popperPlacement={popperPlacement}
       >
-        {value}
-      </text>
-    </g>
+        <div className="p-1">
+          <div
+            style={{
+              backgroundColor:
+                variant === 'secondary'
+                  ? 'rgba(18, 35, 158, 0.5)'
+                  : 'rgba(255, 255, 255, 0.70)',
+            }}
+            className={cn('rounded px-2 text-xs text-white', {
+              'text-chart-gray': variant === 'primary',
+              'text-white': variant === 'secondary',
+            })}
+          >
+            {value}
+          </div>
+        </div>
+      </Popover>
+    </>
   );
 };
 

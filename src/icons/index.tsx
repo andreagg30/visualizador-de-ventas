@@ -300,3 +300,18 @@ export const CircleDownIcon = ({ className }: Props) => {
     </svg>
   );
 };
+
+export const TriangleIcon = ({ className }: Props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      width={24}
+      height={24}
+      viewBox="0 -960 960 960"
+      className={cn('text-black', className)}
+    >
+      <path d="m80-160 400-640 400 640H80Z" fill="currentColor" />
+    </svg>
+  );
+};

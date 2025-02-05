@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Placement } from '@/hooks/usePopover';
 import useTooltip from '@/hooks/useTooltip';
 import ControlledTooltip from './ControlledTooltip';
@@ -8,6 +8,7 @@ interface Props {
   children?: React.ReactNode;
   title?: string;
   description?: React.ReactNode;
+  popoverStyle?: CSSProperties;
   placement?: Placement;
   className?: string;
   maxWidth?: string;
@@ -26,6 +27,7 @@ export default function Tooltip({
   placement = 'bottom',
   show,
   disabled,
+  popoverStyle,
 }: Props): JSX.Element {
   const { isTooltipVisible, handleMouseEnter, handleMouseLeave } = useTooltip();
 
@@ -37,6 +39,8 @@ export default function Tooltip({
       description={description}
       className={className}
       maxWidth={maxWidth}
+      hideTriangle
+      popoverStyle={popoverStyle}
       placement={placement}
       onMouseLeave={disabled ? undefined : handleMouseLeave}
       onMouseEnter={disabled ? undefined : handleMouseEnter}

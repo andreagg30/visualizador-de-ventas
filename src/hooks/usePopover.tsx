@@ -122,7 +122,7 @@ export default function usePopover<T extends HTMLElement>({
             Object.assign(popperElement.style, {
               position: 'fixed',
               left: `${x}px`,
-              top: `${y}px`,
+              top: `${y + 5}px`,
             });
 
             setPopperPlacement(newPlacement);

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import usePopover, { Placement } from '@/hooks/usePopover';
 import Popover from './Popover';
 import { cn } from '@/utils/helpers';
+import { TriangleIcon } from '@/icons';
 export type ControlledTooltipVariants =
   | 'default'
   | 'light'
@@ -24,6 +25,7 @@ interface Props {
   variant?: ControlledTooltipVariants;
   icon?: React.ReactNode;
   maxWidth?: string;
+  popoverStyle?: CSSProperties;
   onMouseLeave?: VoidFunction;
   closeIcon?: boolean;
   onMouseEnter?: VoidFunction;
@@ -32,15 +34,6 @@ interface Props {
   hideTriangle?: boolean;
 }
 
-const variantIconClasses = {
-  default: 'text-black',
-  primary: 'text-brand-950',
-  light: 'text-brand-950',
-  dark: 'text-white',
-  error: 'text-error-700',
-  warning: 'text-warning-900',
-  success: 'text-success-700',
-};
 
 const variantTriangleClasses = {
   default: 'text-black',
@@ -85,7 +78,6 @@ export default function ControlledTooltip({
   content,
   title,
   variant = 'default',
-  icon,
   description,
   textSize = 'sm',
   className,
@@ -95,23 +87,22 @@ export default function ControlledTooltip({
   onMouseLeave,
   offsetWidth,
   onMouseEnter,
-  handleCloseTooltip,
   closeIcon,
   hideTriangle,
+  popoverStyle
 }: Props): JSX.Element {
   const {
     popperPlacement,
     handlePopperElement,
     isPopperOpen,
     referenceElement,
-    marginTop,
   } = usePopover<HTMLDivElement>({ placement, allowedPlacements });
 
   const popoverPlacement: Placement = popperPlacement || placement;
   const triangle = (
     <div className={`relative flex h-4 w-full items-end justify-center`}>
       <div className="relative z-40 flex h-4 w-4 items-end justify-center overflow-hidden">
-        {/* <div className="absolute bottom-0 z-40 h-3 w-4 overflow-hidden">
+        <div className="absolute bottom-0 z-40 h-3 w-4 overflow-hidden">
           <TriangleIcon
             className={cn(variantTriangleColorClasses[variant], 'h-4 w-4')}
           />
@@ -120,7 +111,7 @@ export default function ControlledTooltip({
           <TriangleIcon
             className={cn(variantTriangleClasses[variant], 'h-6 w-6')}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
@@ -185,6 +176,7 @@ export default function ControlledTooltip({
           popperPlacement={popoverPlacement}
         >
           <div
+          style={popoverStyle}
             className={cn(
               'flex',
               { 'items-end': popoverPlacement === 'left-end' },

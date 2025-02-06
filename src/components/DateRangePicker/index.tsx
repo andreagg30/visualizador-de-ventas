@@ -3,22 +3,22 @@ import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import TooltipSlider from './Tooltip';
 import { isNumber } from 'lodash';
+import moment from 'moment';
+import { DateRangeValue } from '../RangeDateSelect';
 
 type Props = {
-  handleFromDate?: (value: string) => void;
-  handleToDate?: (value: string) => void;
+  onChange: (value: DateRangeValue) => void;
+  value?: DateRangeValue;
 };
 
-const RangeSliderWithTooltip: React.FC<Props> = ({
-  handleFromDate,
-  handleToDate,
-}) => {
+const DateRangePicker: React.FC<Props> = ({ onChange, value }) => {
   const [dates, setDates] = useState<[string, string]>([
     new Date().toISOString().split('T')[0],
     new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   ]);
+  const twoYearsAgo = moment().subtract(2, 'years').format('YYYY-MM-DD');
 
-  const minDate = new Date('2024-01-01').getTime();
+  const minDate = new Date(twoYearsAgo).getTime();
 
   const dateToValue = (date: string): number =>
     Math.floor((new Date(date).getTime() - minDate) / (1000 * 60 * 60 * 24));
@@ -29,17 +29,19 @@ const RangeSliderWithTooltip: React.FC<Props> = ({
 
   const handleChange = (values: number | number[]): void => {
     if (isNumber(values)) return;
-    const toValue = valueToDate(values[0]);
-    const fromValue = valueToDate(values[1]);
-    setDates([toValue, fromValue]);
-    if (handleToDate) {
-      handleToDate(toValue);
-    }
+    const fromValue = valueToDate(values[0]);
+    const toValue = valueToDate(values[1]);
+    setDates([fromValue, toValue]);
 
-    if (handleFromDate) {
-      handleFromDate(fromValue);
+    if (onChange) {
+      onChange({
+        from: fromValue,
+        to: toValue,
+      });
     }
   };
+
+  const today = moment().format('YYYY-MM-DD');
 
   return (
     <div className="mx-auto w-60 p-4">
@@ -61,8 +63,11 @@ const RangeSliderWithTooltip: React.FC<Props> = ({
       <TooltipSlider
         range
         min={0}
-        max={dateToValue('2024-12-31')}
-        value={[dateToValue(dates[0]), dateToValue(dates[1])]}
+        max={dateToValue(today)}
+        value={[
+          dateToValue(value?.from || twoYearsAgo),
+          dateToValue(value?.to || today),
+        ]}
         onChange={handleChange}
         tipFormatter={(value) => {
           if (value === dateToValue(dates[0])) {
@@ -89,4 +94,4 @@ const RangeSliderWithTooltip: React.FC<Props> = ({
   );
 };
 
-export default RangeSliderWithTooltip;
+export default DateRangePicker;

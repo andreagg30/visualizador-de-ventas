@@ -14,11 +14,7 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    minDate: '2000-10-10',
-    maxDate: '2010-10-10',
-    onChange: () => {
-
-    }
+    
   },
 } satisfies Meta<typeof DateRangePicker>;
 

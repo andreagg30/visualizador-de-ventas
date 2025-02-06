@@ -1,11 +1,11 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from 'react-router-dom';
 import Layout from './components/Layout';
-import Home from './pages/Home';
 import VentasMacro from './pages/VentasMacro';
 import DetalleSucursal from './pages/DetalleSucursal';
 import DetalleVendedor from './pages/DetalleVendedor';
@@ -16,12 +16,13 @@ import './locale/es-mx';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
+      <Route index element={<VentasMacro />} />
       <Route path='/ventas-macro' element={<VentasMacro />} />
       <Route path='/detalle-unidad-de-negocio' element={<DetalleUnidadNegocio />} />
       <Route path='/detalle-sucursal' element={<DetalleSucursal />} />
       <Route path='/detalle-vendedor' element={<DetalleVendedor />} />
       <Route path='/ranking-vendedor' element={<RankingVendedor />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
